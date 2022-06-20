@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Home</title>
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <div class="header">
+                <ul class="navlinks">
+                    <li><a href="{{url_for('HomeView:home')}}" class="logo">Pyfloraposuda</a></li>
+                    <li><a href="{{url_for('HomeView:home')}}" class="link">Birjke</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{url_for('UserView:logout')}}" class="link">Logout</a></li>
+                    <li><a href="{{url_for('UserView:profile')}}" class="link">Profile</a></li>
+                    {% endif %}
+                </ul>
+        </div>
+        <div class="user-name">
+            <h1>Name: {{name}}</h1>
+        </div>
+        <div class="main-body">
+            
+            {% for plant in profile_plants %}
+            
+            <a style="text-decoration:none;" href="{{url_for('HomeView:update_plant', id=plant.plant_id )}}">
+            <div class="plant">
+                <div class="image-part">
+                <img style="width:100% ; height:100%;" src="{{url_for('static', filename='images/')}}{{plant.plant_image}}"/>
+                </div>
+                <div class="text-part">
+                    <p>{{plant.plant_name}}</p>
+                    <p>{{plant.line_one}}</p>
+                    <p>{{plant.line_two}}</p>
+                    <p>{{plant.line_three}}</p>
+                    <p>{{plant.line_four}}</p>
+                    <p>{{plant.line_five}}</p>
+                </div>
+            </div>
+            </a>
+
+            {% endfor %}
+        </div>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Home</title>
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css"/>
+    </head>
+
+    <body>
+        <div class="header">
+                <ul class="navlinks">
+                    <li><a href="{{url_for('HomeView:home')}}" class="logo">Pyfloraposuda</a></li>
+                    <li><a href="{{url_for('HomeView:home')}}" class="link">Birjke</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{url_for('UserView:logout')}}" class="link">Logout</a></li>
+                    <li><a href="{{url_for('UserView:profile')}}" class="link">Profile</a></li>
+                    {% endif %}
+                </ul>
+        </div>
+        <div class="main-body">
+            <div class="login-form-box">
+            <h1>About Plant</h1>
+            <form class="login-form" method="post" action="{{url_for('HomeView:add_new_plant')}}" enctype="multipart/form-data">
+                <input class="inputField" name="plant_name" type="text" placeholder="Plant name"/>
+                <input class="inputField" name="line_one" type="text" placeholder="line 1"/>
+                <input class="inputField" name="line_two" type="text" placeholder="line 2"/>
+                <input class="inputField" name="line_three" type="text" placeholder="line 3"/>
+                <input class="inputField" name="line_four" type="text" placeholder="line 4"/>
+                <input class="inputField" name="line_five" type="text" placeholder="line 5"/>
+                <input class="inputButton" name="plant_image" type="file" value="Image"/>
+                <div style="display: flex; width: 100px; justify-content: space-between;">
+                <button class="inputButton" name="">Add</button>
+                <a href="{{url_for('HomeView:home')}}">
+                <input class="inputButton" type="button" value="cancel"/>
+                </a>
+                </div>
+            </form>
+        </div>
+        </div>
+    </body>
+</html>
